@@ -4,9 +4,9 @@ vcpkg_check_linkage(ONLY_DYNAMIC_LIBRARY)
 
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
-    REPO libfann/fann
-    REF 2.2.0
-    SHA512 b307539a39d93078a489710ac77aa8c6e324f3cf5ef80299ce257d10c043913764abef83aceac5278a5bd243b1ee245b4e8331a9e13c774aa63c9cb604f86bdd
+    REPO E452003/fann
+    REF 92340ee8f45daab8759f352a67f56c25246b7660
+    SHA512 1c6544bdc5870b5b5b16aca8f3da387b50b28eba2b8b37c46420702b2c2ccaded3c8516c024f9820e5f05c44c45fa010df1362879142a5f62c37cfda9c210e4c
     HEAD_REF master
 )
 
@@ -17,34 +17,16 @@ vcpkg_configure_cmake(
 vcpkg_install_cmake()
 
 if(NOT VCPKG_CMAKE_SYSTEM_NAME)
-    # Finish Directories
-    file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/bin)
-    file(RENAME ${CURRENT_PACKAGES_DIR}/fann.dll ${CURRENT_PACKAGES_DIR}/bin/fann.dll)
-    file(RENAME ${CURRENT_PACKAGES_DIR}/doublefann.dll ${CURRENT_PACKAGES_DIR}/bin/doublefann.dll)
-    file(RENAME ${CURRENT_PACKAGES_DIR}/fixedfann.dll ${CURRENT_PACKAGES_DIR}/bin/fixedfann.dll)
-    file(RENAME ${CURRENT_PACKAGES_DIR}/floatfann.dll ${CURRENT_PACKAGES_DIR}/bin/floatfann.dll)
-    file(RENAME ${CURRENT_PACKAGES_DIR}/fann.lib ${CURRENT_PACKAGES_DIR}/lib/fann.lib)
-    file(RENAME ${CURRENT_PACKAGES_DIR}/doublefann.lib ${CURRENT_PACKAGES_DIR}/lib/doublefann.lib)
-    file(RENAME ${CURRENT_PACKAGES_DIR}/fixedfann.lib ${CURRENT_PACKAGES_DIR}/lib/fixedfann.lib)
-    file(RENAME ${CURRENT_PACKAGES_DIR}/floatfann.lib ${CURRENT_PACKAGES_DIR}/lib/floatfann.lib)
-    file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/debug/bin)
-    file(RENAME ${CURRENT_PACKAGES_DIR}/debug/fann.dll ${CURRENT_PACKAGES_DIR}/debug/bin/fann.dll)
-    file(RENAME ${CURRENT_PACKAGES_DIR}/debug/doublefann.dll ${CURRENT_PACKAGES_DIR}/debug/bin/doublefann.dll)
-    file(RENAME ${CURRENT_PACKAGES_DIR}/debug/fixedfann.dll ${CURRENT_PACKAGES_DIR}/debug/bin/fixedfann.dll)
-    file(RENAME ${CURRENT_PACKAGES_DIR}/debug/floatfann.dll ${CURRENT_PACKAGES_DIR}/debug/bin/floatfann.dll)
-    file(RENAME ${CURRENT_PACKAGES_DIR}/debug/fann.lib ${CURRENT_PACKAGES_DIR}/debug/lib/fann.lib)
-    file(RENAME ${CURRENT_PACKAGES_DIR}/debug/doublefann.lib ${CURRENT_PACKAGES_DIR}/debug/lib/doublefann.lib)
-    file(RENAME ${CURRENT_PACKAGES_DIR}/debug/fixedfann.lib ${CURRENT_PACKAGES_DIR}/debug/lib/fixedfann.lib)
-    file(RENAME ${CURRENT_PACKAGES_DIR}/debug/floatfann.lib ${CURRENT_PACKAGES_DIR}/debug/lib/floatfann.lib)
-
     # Remove useless config file and include path
     file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
+    file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/lib/cmake)
     file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/lib/pkgconfig)
+    file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/lib/cmake)
     file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/lib/pkgconfig)
 endif()
 
 # Handle copyright
-file(COPY ${SOURCE_PATH}/COPYING.txt DESTINATION ${CURRENT_PACKAGES_DIR}/share/${PORT})
-file(RENAME ${CURRENT_PACKAGES_DIR}/share/${PORT}/COPYING.txt ${CURRENT_PACKAGES_DIR}/share/${PORT}/copyright)
+file(COPY ${SOURCE_PATH}/LICENSE.md DESTINATION ${CURRENT_PACKAGES_DIR}/share/${PORT})
+file(RENAME ${CURRENT_PACKAGES_DIR}/share/${PORT}/LICENSE.md ${CURRENT_PACKAGES_DIR}/share/${PORT}/copyright)
 
 vcpkg_copy_pdbs()
