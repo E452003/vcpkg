@@ -2,8 +2,8 @@ include(vcpkg_common_functions)
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO E452003/wxWidgets
-    REF b0db687a1942bdd218a584c1062211b40dfeb40e
-    SHA512 eb2d911ab30e1066540210df0e5b69260d99afa7fcab43668da09940581feda3db12afee0c67b4a01b40413cfc38079b47b25559ec6c21b6b2a0b3b83eb93f84
+    REF ee85064bbe2f8661a6bb8a6d58b90f2da5d408d3
+	SHA512 ab3b39dfc9a93e8a3e4d2f787b8d92dd610209926adc6891b2b66f54fd6f3b792fc7119149ac9528777271e846a906cad7fba70f47e7411a179eb3882893425d
     HEAD_REF master
     PATCHES disable-platform-lib-dir.patch
 )
@@ -11,6 +11,13 @@ vcpkg_from_github(
 set(OPTIONS)
 if(VCPKG_CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     set(OPTIONS -DCOTIRE_MINIMUM_NUMBER_OF_TARGET_SOURCES=9999)
+endif()
+
+if(VCPKG_TARGET_ARCHITECTURE STREQUAL arm64 OR VCPKG_TARGET_ARCHITECTURE STREQUAL arm)
+    set(OPTIONS
+        -DwxUSE_OPENGL=OFF
+        -DwxUSE_STACKWALKER=OFF
+    )
 endif()
 
 vcpkg_configure_cmake(

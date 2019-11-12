@@ -14,13 +14,14 @@ vcpkg_add_to_path("${PYTHON3_DIR}")
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO facebook/folly
-    REF v2019.04.15.00
-    SHA512 c28733b5157758ca6c7b28e0bfaddeaf17578c014003c33a18a326befe7f987a65de90c9281854088f013454efe86de27a9e134a10ae20042c73abf78d418b8e
+    REF d12df6e924adc3889cd2fbeaca078355c5da170f
+    SHA512 ecb55cda91ab6db1519b612b676b5166454132960edce0a36f1b4e42f5e1a5f753d8bbb2ed93e34faed1025a54840eb4dc876a49c88b8dd9c90c8070dafc43b8
     HEAD_REF master
     PATCHES
         missing-include-atomic.patch
         boost-1.70.patch
         reorder-glog-gflags.patch
+        disable-non-underscore-posix-names.patch
 )
 
 file(COPY
@@ -72,7 +73,7 @@ vcpkg_install_cmake(ADD_BIN_TO_PATH)
 
 vcpkg_copy_pdbs()
 
-vcpkg_fixup_cmake_targets(CONFIG_PATH share/folly)
+vcpkg_fixup_cmake_targets()
 
 # Release folly-targets.cmake does not link to the right libraries in debug mode.
 # We substitute with generator expressions so that the right libraries are linked for debug and release.
