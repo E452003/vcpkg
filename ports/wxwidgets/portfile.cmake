@@ -3,9 +3,9 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO E452003/wxWidgets
     REF ee85064bbe2f8661a6bb8a6d58b90f2da5d408d3
-	SHA512 ab3b39dfc9a93e8a3e4d2f787b8d92dd610209926adc6891b2b66f54fd6f3b792fc7119149ac9528777271e846a906cad7fba70f47e7411a179eb3882893425d
+    SHA512 ab3b39dfc9a93e8a3e4d2f787b8d92dd610209926adc6891b2b66f54fd6f3b792fc7119149ac9528777271e846a906cad7fba70f47e7411a179eb3882893425d
     HEAD_REF master
-    PATCHES disable-platform-lib-dir.patch fix-macos-clipboard.patch
+    PATCHES disable-platform-lib-dir.patch
 )
 
 set(OPTIONS)
